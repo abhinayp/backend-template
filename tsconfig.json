@@ -16,6 +16,16 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@configuration": ["src/config/configuration.ts"],
+      "@resources/*": ["src/resources/*"]
+    },
+  },
+  "include": [
+    "src/**/*",
+    "src/**/*.json"
+  ],
 }

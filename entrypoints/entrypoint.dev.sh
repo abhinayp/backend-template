@@ -11,6 +11,10 @@ case $COMMAND in
     npm install
     npm run start:dev
     ;;
+  install)
+    echo "Intalling Deps"
+    npm install
+    ;;
   *)
     echo "unknown command, running bash $COMMAND"
     exit 127

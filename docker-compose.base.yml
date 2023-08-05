@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  base:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.dev
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    profiles:
+      - base
+volumes:
+  node_modules:
+  db-data:
