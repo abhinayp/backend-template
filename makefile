@@ -18,3 +18,7 @@ restart:
 	${DOCKER_COMPOSE} restart
 reload: down up
 	echo "reloaded"
+migrate:
+	${DOCKER_COMPOSE} run --rm base migrations:run
+migrate_revert:
+	${DOCKER_COMPOSE} run --rm base migrations:revert

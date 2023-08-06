@@ -20,11 +20,12 @@
     "resolveJsonModule": true,
     "paths": {
       "@/*": ["src/*"],
-      "@configuration": ["src/config/configuration.ts"],
+      "@configuration": ["src/config"],
       "@resources/*": ["src/resources/*"]
     },
   },
   "include": [
+    "src/*",
     "src/**/*",
     "src/**/*.json"
   ],

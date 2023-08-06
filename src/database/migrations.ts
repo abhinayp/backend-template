@@ -1,0 +1,51 @@
+import { getConfiguration } from '@configuration';
+import { getDataSource } from './database.source';
+import { Migration } from 'typeorm'
+const commandLineArgs = require('command-line-args')
+
+const dataSourceAsync = async () => {
+  const config = getConfiguration()
+  const dataSource = getDataSource(config.database)
+  return dataSource
+}
+
+const runMigrations = async () => {
+  const dataSource = await dataSourceAsync()
+  await dataSource.initialize()
+  const res: Migration[] = await dataSource.runMigrations()
+  if (res && res.length) {
+    console.log(res)
+    console.log('Migrations ran successfully');
+  }
+  else {
+    console.log('No migrations pending');
+  }
+  await dataSource.destroy()
+}
+
+const undoLastMigration = async () => {
+  const dataSource = await dataSourceAsync()
+  await dataSource.initialize()
+  await dataSource.undoLastMigration()
+  console.log('Last Migration undid successfully');
+  await dataSource.destroy()
+}
+
+const optionDefinitions = [
+  { name: 'run', alias: 'r', type: Boolean },
+  { name: 'undoLastMigration', alias: 'u', type: Boolean },
+]
+interface IOptions {
+  run: boolean,
+  undoLastMigration: boolean
+}
+const options: IOptions = commandLineArgs(optionDefinitions)
+console.log(options);
+
+if (options.run) {
+  runMigrations()
+}
+
+if (options.undoLastMigration) {
+  undoLastMigration()
+}

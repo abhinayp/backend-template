@@ -15,6 +15,14 @@ case $COMMAND in
     echo "Intalling Deps"
     npm install
     ;;
+  migrations:run)
+    echo "Running Migrations"
+    npm run migrations -- --run
+    ;;
+  migrations:revert)
+    echo "Reverting Last Migration"
+    npm run migrations -- --undoLastMigration
+    ;;
   *)
     echo "unknown command, running bash $COMMAND"
     exit 127
