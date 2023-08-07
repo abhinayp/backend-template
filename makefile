@@ -10,9 +10,9 @@ build:
 	${DOCKER_COMPOSE} build
 install: build
 	${DOCKER_COMPOSE} run --rm base install --profile=base
-up: build install
+start: build install
 	${DOCKER_COMPOSE} up -d
-down:
+stop:
 	${DOCKER_COMPOSE} down
 restart:
 	${DOCKER_COMPOSE} restart
