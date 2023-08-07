@@ -21,7 +21,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@configuration": ["src/config"],
-      "@resources/*": ["src/resources/*"]
+      "@resources/*": ["src/root/*"],
+      "@database/*": ["src/database/*"],
+      "@api/*": ["src/api/*"],
+      "@modules/*": ["src/modules/*"],
     },
   },
   "include": [
