@@ -16,7 +16,7 @@ stop:
 	${DOCKER_COMPOSE} down
 restart:
 	${DOCKER_COMPOSE} restart
-reload: down up
+reload: stop start
 	echo "reloaded"
 migrate:
 	${DOCKER_COMPOSE} run --rm base migrations:run
