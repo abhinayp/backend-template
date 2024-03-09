@@ -36,6 +36,7 @@ migrate: build
 migrate_revert: build
 	${DOCKER_COMPOSE} run --rm app migrations:revert
 test: build
-	${DOCKER_COMPOSE} run --rm app test
+	${DOCKER_COMPOSE} -f docker-compose.base.yml -f docker-compose.tests.yml run --rm test-app
+	${DOCKER_COMPOSE} -f docker-compose.base.yml -f docker-compose.tests.yml down
 format: build
 	${DOCKER_COMPOSE} run --rm --entrypoint npm app run format

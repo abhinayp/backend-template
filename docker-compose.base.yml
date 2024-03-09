@@ -1,0 +1,14 @@
+volumes:
+  node_modules:
+    driver_opts:
+      type: none
+      device: ${PWD}/node_modules
+      o: bind,uid=${UID:-1000},gid=${GID:-1000}
+    driver: local
+  npm_cache:
+    driver_opts:
+      type: none
+      device: ${PWD}/.npm-cache
+      o: bind,uid=${UID:-1000},gid=${GID:-1000}
+    driver: local
+  db-data:

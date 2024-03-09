@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  app:
+  test-app:
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,23 +10,27 @@ services:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
         USER_NAME: ${USER_NAME:-node}
-    ports:
-      - "4000:4000"
+    entrypoint: ["npm"]
+    command: ["run", "test"]
     environment:
-      - CONFIGURATION_FILE=dist/config/development.json
+      - CONFIGURATION_FILE=dist/config/test.json
     volumes:
       - .:/home/${USER_NAME}/app
       - node_modules:/home/${USER_NAME}/app/node_modules
       - npm_cache:/home/${USER_NAME}/.npm
     depends_on:
-      - db
-  db:
+      - test-db
+  test-db:
     image: postgres:12.2-alpine
+    # start with 5433 port to avoid conflict with the db
+    command: ["postgres", "-p", "5433"]
     ports:
-      - "5432:5432"
+      - "5433:5433"
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - test-db-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: app_user
-      POSTGRES_PASSWORD: app_pass
-      POSTGRES_DB: development
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_pass
+      POSTGRES_DB: test
+volumes:
+  test-db-data:
