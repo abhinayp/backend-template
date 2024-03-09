@@ -3,6 +3,7 @@ import { AppModule } from './root/app.module'
 import { ConfigService } from '@nestjs/config'
 import { Logger, VersioningType } from '@nestjs/common'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
+import { LoggingInterceptor } from './interceptors/logger.interceptor'
 
 async function bootstrap() {
   const logger = new Logger('main')
@@ -11,7 +12,7 @@ async function bootstrap() {
   app.enableVersioning({
     type: VersioningType.URI,
   })
-
+  app.useGlobalInterceptors(new LoggingInterceptor())
   const config = new DocumentBuilder()
     .setTitle('My App')
     .setDescription('')
