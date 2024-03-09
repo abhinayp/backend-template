@@ -15,8 +15,12 @@ create-required-folders:
 	mkdir -p node_modules || true
 	mkdir -p .npm-cache || true
 
+ifeq ($(build),false)
+build: create-required-folders
+else
 build: create-required-folders
 	${DOCKER_COMPOSE} build
+endif
 install: build
 	${DOCKER_COMPOSE} run --rm --entrypoint npm app install
 start: build

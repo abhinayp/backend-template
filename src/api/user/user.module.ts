@@ -10,4 +10,4 @@ export const UserModuleConfig: ModuleMetadata = {
   providers: [UserService, UserModel],
 }
 @Module(UserModuleConfig)
-export class UserModule { }
+export class UserModule {}

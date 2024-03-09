@@ -1,0 +1,10 @@
+{
+  "port": 4000,
+  "database": {
+    "host": "db",
+    "user": "app_user",
+    "password": "app_pass",
+    "database": "development",
+    "port": 5432
+  }
+}

@@ -8,7 +8,9 @@ describe('UserController', () => {
 
   beforeEach(async () => {
     UserModuleConfig.imports.push(ConfigModule)
-    const module: TestingModule = await Test.createTestingModule(UserModuleConfig).compile()
+    const module: TestingModule = await Test.createTestingModule(
+      UserModuleConfig
+    ).compile()
 
     controller = module.get<UserController>(UserController)
   })

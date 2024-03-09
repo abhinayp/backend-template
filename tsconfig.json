@@ -24,7 +24,8 @@
       "@resources/*": ["src/root/*"],
       "@database/*": ["src/database/*"],
       "@api/*": ["src/api/*"],
-      "@modules/*": ["src/modules/*"]
+      "@modules/*": ["src/modules/*"],
+      "@env": ["src/util/env"]
     }
   },
   "include": ["src/*", "src/**/*", "src/**/*.json", "jest.config.js"],

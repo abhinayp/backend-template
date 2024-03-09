@@ -12,6 +12,8 @@ services:
         USER_NAME: ${USER_NAME:-node}
     ports:
       - "4000:4000"
+    environment:
+      - CONFIGURATION_FILE=dist/config/development.json
     volumes:
       - .:/home/${USER_NAME}/app
       - node_modules:/home/${USER_NAME}/app/node_modules
@@ -28,7 +30,20 @@ services:
       POSTGRES_USER: app_user
       POSTGRES_PASSWORD: app_pass
       POSTGRES_DB: development
-
+  test-db:
+    image: postgres:12.2-alpine
+    # start with 5433 port to avoid conflict with the db
+    command: ["postgres", "-p", "5433"]
+    ports:
+      - "5433:5433"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_pass
+      POSTGRES_DB: test
+    profiles:
+      - test
 volumes:
   node_modules:
     driver_opts:
