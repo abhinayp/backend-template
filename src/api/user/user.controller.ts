@@ -4,7 +4,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('user')
 @Controller({
-  version: ['1', '2'],
+  version: ['1'],
   path: 'user'
 })
 export class UserController {
