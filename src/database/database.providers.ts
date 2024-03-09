@@ -1,7 +1,5 @@
-import { ConfigService } from '@nestjs/config';
-import { getDataSource } from './database.source';
-import { DataSource } from 'typeorm';
-import { User } from './entities/user.entity';
+import { ConfigService } from '@nestjs/config'
+import { getDataSource } from './database.source'
 
 export const databaseProviders = [
   {
@@ -9,7 +7,7 @@ export const databaseProviders = [
     inject: [ConfigService],
     useFactory: async (configService: ConfigService) => {
       const dataSource = getDataSource(configService.get('database'))
-      return dataSource.initialize();
+      return dataSource.initialize()
     },
-  }
-];
+  },
+]

@@ -24,14 +24,10 @@
       "@resources/*": ["src/root/*"],
       "@database/*": ["src/database/*"],
       "@api/*": ["src/api/*"],
-      "@modules/*": ["src/modules/*"],
-    },
+      "@modules/*": ["src/modules/*"]
+    }
   },
-  "include": [
-    "src/*",
-    "src/**/*",
-    "src/**/*.json"
-  ],
+  "include": ["src/*", "src/**/*", "src/**/*.json", "jest.config.js"],
   "ts-node": {
     "package": "tsconfig-paths/register"
   }

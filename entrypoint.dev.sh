@@ -23,6 +23,9 @@ case $COMMAND in
     echo "Reverting Last Migration"
     npm run migrations -- --undoLastMigration
     ;;
+  test)
+    npm run test
+    ;;
   *)
     echo "unknown command, running bash $COMMAND"
     exit 127

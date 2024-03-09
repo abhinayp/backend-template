@@ -1,7 +1,7 @@
-import { getConfiguration } from '@configuration';
-import { getDataSource } from './database.source';
+import { getConfiguration } from '@configuration'
+import { getDataSource } from './database.source'
 import { Migration } from 'typeorm'
-const commandLineArgs = require('command-line-args')
+import * as commandLineArgs from 'command-line-args'
 
 const dataSourceAsync = async () => {
   const config = getConfiguration()
@@ -15,10 +15,9 @@ const runMigrations = async () => {
   const res: Migration[] = await dataSource.runMigrations()
   if (res && res.length) {
     console.log(res)
-    console.log('Migrations ran successfully');
-  }
-  else {
-    console.log('No migrations pending');
+    console.log('Migrations ran successfully')
+  } else {
+    console.log('No migrations pending')
   }
   await dataSource.destroy()
 }
@@ -26,15 +25,17 @@ const runMigrations = async () => {
 const undoLastMigration = async () => {
   const dataSource = await dataSourceAsync()
   await dataSource.initialize()
-  const migrations = await dataSource.query('SELECT * FROM migrations ORDER BY id DESC LIMIT 1')
+  const migrations = await dataSource.query(
+    'SELECT * FROM migrations ORDER BY id DESC LIMIT 1'
+  )
   if (!migrations || !migrations.length) {
-    console.log('No migrations to undo');
+    console.log('No migrations to undo')
     await dataSource.destroy()
     return
   }
   console.log('Undoing last migration', migrations[0].name)
   await dataSource.undoLastMigration()
-  console.log('Last Migration undid successfully');
+  console.log('Last Migration undid successfully')
   await dataSource.destroy()
 }
 
@@ -43,7 +44,7 @@ const optionDefinitions = [
   { name: 'undoLastMigration', alias: 'u', type: Boolean },
 ]
 interface IOptions {
-  run: boolean,
+  run: boolean
   undoLastMigration: boolean
 }
 const options: IOptions = commandLineArgs(optionDefinitions)

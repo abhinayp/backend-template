@@ -31,3 +31,7 @@ migrate: build
 	${DOCKER_COMPOSE} run --rm app migrations:run
 migrate_revert: build
 	${DOCKER_COMPOSE} run --rm app migrations:revert
+test: build
+	${DOCKER_COMPOSE} run --rm app test
+format: build
+	${DOCKER_COMPOSE} run --rm --entrypoint npm app run format

@@ -1,11 +1,11 @@
-import { DataSource } from 'typeorm';
+import { DataSource } from 'typeorm'
 
 interface DataSourceConfig {
-  host: string;
-  port: number;
-  user: string;
-  password: string;
-  database: string;
+  host: string
+  port: number
+  user: string
+  password: string
+  database: string
 }
 
 export const getDataSource = (config: DataSourceConfig) => {
@@ -16,14 +16,10 @@ export const getDataSource = (config: DataSourceConfig) => {
     username: config.user,
     password: config.password,
     database: config.database,
-    entities: [
-        __dirname + '/**/*.entity{.ts,.js}',
-    ],
-    migrations: [
-        __dirname + '/migrations/*{.ts,.js}',
-    ],
+    entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    migrations: [__dirname + '/migrations/*{.ts,.js}'],
     // synchronize: true,
-  });
+  })
 
-  return dataSource;
+  return dataSource
 }
