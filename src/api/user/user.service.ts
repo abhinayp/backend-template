@@ -1,4 +1,4 @@
-import { UserModel } from '@/database/models/user.model';
+import { UserModel } from '@/api/user/user.model';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
