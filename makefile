@@ -30,7 +30,7 @@ stop:
 restart:
 	${DOCKER_COMPOSE} restart
 reload: stop start
-	echo "reloaded"
+	@echo "reloaded"
 migrate: build
 	${DOCKER_COMPOSE} run --rm app migrations:run
 migrate_revert: build
