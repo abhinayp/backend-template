@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+        USER_NAME: ${USER_NAME:-node}
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/home/${USER_NAME}/app
+      - node_modules:/home/${USER_NAME}/app/node_modules
+      - npm_cache:/home/${USER_NAME}/.npm
+    depends_on:
+      - db
+  db:
+    image: postgres:12.2-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: app_pass
+      POSTGRES_DB: development
+
+volumes:
+  node_modules:
+    driver_opts:
+      type: none
+      device: ${PWD}/node_modules
+      o: bind,uid=${UID:-1000},gid=${GID:-1000}
+    driver: local
+  npm_cache:
+    driver_opts:
+      type: none
+      device: ${PWD}/.npm-cache
+      o: bind,uid=${UID:-1000},gid=${GID:-1000}
+    driver: local
+  db-data:
