@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev
+      target: base
       args:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
@@ -13,11 +13,11 @@ services:
     entrypoint: ["npm"]
     command: ["run", "test"]
     environment:
+      - NODE_ENV=test
       - CONFIGURATION_FILE=dist/config/test.json
     volumes:
       - .:/home/${USER_NAME}/app
-      - node_modules:/home/${USER_NAME}/app/node_modules
-      - npm_cache:/home/${USER_NAME}/.npm
+      - ./.npm-cache:/home/${USER_NAME}/.npm
     depends_on:
       - test-db
   test-db:

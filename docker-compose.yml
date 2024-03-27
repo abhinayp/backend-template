@@ -5,19 +5,20 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: dev
+      target: base
       args:
         UID: ${UID:-1000}
         GID: ${GID:-1000}
         USER_NAME: ${USER_NAME:-node}
+    command: npm run start:dev
     ports:
       - "4000:4000"
     environment:
+      - NODE_ENV=development
       - CONFIGURATION_FILE=dist/config/development.json
     volumes:
       - .:/home/${USER_NAME}/app
-      - node_modules:/home/${USER_NAME}/app/node_modules
-      - npm_cache:/home/${USER_NAME}/.npm
+      - ./.npm-cache:/home/${USER_NAME}/.npm
     depends_on:
       - db
   db:

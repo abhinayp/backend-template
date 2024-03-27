@@ -23,7 +23,7 @@ build: create-required-folders
 endif
 install: build
 	${DOCKER_COMPOSE} run --rm --entrypoint npm app install
-start: build
+start: build install
 	${DOCKER_COMPOSE} up -d
 stop:
 	${DOCKER_COMPOSE} down
@@ -40,3 +40,5 @@ test: build
 	${DOCKER_COMPOSE} -f docker-compose.base.yml -f docker-compose.tests.yml down
 format: build
 	${DOCKER_COMPOSE} run --rm --entrypoint npm app run format
+npm: build
+	${DOCKER_COMPOSE} run --rm --entrypoint npm app $(filter-out $@,$(MAKECMDGOALS))
