@@ -41,4 +41,4 @@ test: build
 format: build
 	${DOCKER_COMPOSE} run --rm --entrypoint npm app run format
 npm: build
-	${DOCKER_COMPOSE} run --rm --entrypoint npm app $(filter-out $@,$(MAKECMDGOALS))
+	${DOCKER_COMPOSE} run --rm --entrypoint npm app $(command)
