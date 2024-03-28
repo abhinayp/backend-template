@@ -1,6 +1,8 @@
 import { Controller, Post, Version } from '@nestjs/common'
 import { UserService } from './user.service'
 import { ApiTags } from '@nestjs/swagger'
+import { InjectQueue } from '@nestjs/bull'
+import { Queue } from 'bull'
 
 @ApiTags('user')
 @Controller({
@@ -8,10 +10,14 @@ import { ApiTags } from '@nestjs/swagger'
   path: 'user',
 })
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    @InjectQueue('order') private orderQueue: Queue
+  ) { }
 
   @Post('get-all')
   async getAll() {
+    this.orderQueue.add('test', { data: 'some data' })
     return await this.userService.findAll()
   }
 }

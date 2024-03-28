@@ -21,6 +21,24 @@ services:
       - ./.npm-cache:/home/${USER_NAME}/.npm
     depends_on:
       - db
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+        USER_NAME: ${USER_NAME:-node}
+    command: npm run start:dev:worker
+    environment:
+      - NODE_ENV=development
+      - CONFIGURATION_FILE=dist/config/development.json
+    volumes:
+      - .:/home/${USER_NAME}/app
+      - ./.npm-cache:/home/${USER_NAME}/.npm
+    depends_on:
+      - db
   db:
     image: postgres:12.2-alpine
     ports:
