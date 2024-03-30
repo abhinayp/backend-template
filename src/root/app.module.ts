@@ -5,18 +5,11 @@ import { UserModule } from '@api/user/user.module'
 import ConfigModule from '@/config'
 import { DatabaseModule } from '@/database/database.module'
 import { LoggerMiddleware } from '@/middleware/logger.middleware'
-import { BullModule } from '@nestjs/bull'
-import { OrderProcessor } from '@/processors/order.processor'
+import { QueueModule } from '@/processors/queue.module'
 
 @Module({
   imports: [
-    BullModule.forRoot({
-      redis: {
-        host: 'redis',
-        port: 6379,
-      },
-    }),
-    UserModule, ConfigModule, DatabaseModule
+    UserModule, ConfigModule, DatabaseModule, QueueModule
   ],
   controllers: [AppController],
   providers: [AppService],

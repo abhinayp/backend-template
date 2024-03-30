@@ -1,21 +1,13 @@
 import { Module } from '@nestjs/common'
 import ConfigModule from '@/config'
-import { BullModule } from '@nestjs/bull'
-import { OrderProcessor } from '@/processors/order.processor'
+import { QueueModule } from '@/processors/queue.module'
+import { ConsumerModule } from '@/processors/consumer.module'
 
 @Module({
   imports: [
     ConfigModule,
-    BullModule.forRoot({
-      redis: {
-        host: 'redis',
-        port: 6379,
-      },
-    }),
-    BullModule.registerQueue({
-      name: 'order'
-    })
+    QueueModule,
+    ConsumerModule
   ],
-  providers: [OrderProcessor],
 })
 export class WorkerModule { }

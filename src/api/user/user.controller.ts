@@ -17,7 +17,7 @@ export class UserController {
 
   @Post('get-all')
   async getAll() {
-    this.orderQueue.add('test', { data: 'some data' })
+    await this.orderQueue.add('test', { data: 'some data' })
     return await this.userService.findAll()
   }
 }
