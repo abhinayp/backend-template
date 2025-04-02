@@ -1,18 +1,9 @@
 {
   "moduleFileExtensions": ["js", "json", "ts"],
-  "rootDir": "../",
+  "rootDir": ".",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
-  },
-  "moduleNameMapper": {
-    "^@api/(.*)$": "<rootDir>/src/api/$1",
-    "^@/(.*)$": "<rootDir>/src/$1",
-    "configuration": "<rootDir>/src/config",
-    "^@resources/(.*)$": "<rootDir>/src/resources/$1",
-    "^@database/(.*)$": "<rootDir>/src/database/$1",
-    "^@modules/(.*)$": "<rootDir>/src/modules/$1"
-  },
-  "detectOpenHandles": true
+  }
 }

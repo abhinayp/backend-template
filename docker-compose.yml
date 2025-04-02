@@ -1,62 +1,50 @@
 version: "3.8"
 
 services:
-  app:
+  server:
+    container_name: PROJECTNAME-server
     build:
       context: .
       dockerfile: Dockerfile
       target: base
       args:
-        UID: ${UID:-1000}
-        GID: ${GID:-1000}
-        USER_NAME: ${USER_NAME:-node}
-    command: npm run start:dev
-    ports:
-      - "4000:4000"
+        - GID=${GID:-1000}
+        - UID=${UID:-1000}
+        - USER=${USER:-PROJECTNAME}
+    entrypoint: ["npm"]
+    command: ["run", "start:dev"]
+    volumes:
+      - .:/app
     environment:
       - NODE_ENV=development
-      - CONFIGURATION_FILE=dist/config/development.json
-    volumes:
-      - .:/home/${USER_NAME}/app
-      - ./.npm-cache:/home/${USER_NAME}/.npm
+      - PORT=5001
+      - REDIS_HOST=redis://PROJECTNAME-redis:6379
+    ports:
+      - "5001:5001"
     depends_on:
-      - db
-  worker:
+      - redis
+  consumer:
+    container_name: PROJECTNAME-consumer
     build:
       context: .
       dockerfile: Dockerfile
       target: base
       args:
-        UID: ${UID:-1000}
-        GID: ${GID:-1000}
-        USER_NAME: ${USER_NAME:-node}
-    command: npm run start:dev:worker
+        - GID=${GID:-1000}
+        - UID=${UID:-1000}
+        - USER=${USER:-PROJECTNAME}
+    entrypoint: ["npm"]
+    command: ["run", "start:consumer:dev"]
+    volumes:
+      - .:/app
     environment:
       - NODE_ENV=development
-      - CONFIGURATION_FILE=dist/config/development.json
-    volumes:
-      - .:/home/${USER_NAME}/app
-      - ./.npm-cache:/home/${USER_NAME}/.npm
+      - REDIS_HOST=redis://PROJECTNAME-redis:6379
     depends_on:
-      - db
-  db:
-    image: postgres:12.2-alpine
-    ports:
-      - "5432:5432"
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: app_user
-      POSTGRES_PASSWORD: app_pass
-      POSTGRES_DB: development
+      - redis
   redis:
-    image: redis:7.0.0-alpine
+    container_name: PROJECTNAME-redis
+    image: redis:alpine
     ports:
       - "6379:6379"
-    volumes:
-      - redis-data:/data
-
-volumes:
-  redis-data:
-  db-data:
 
