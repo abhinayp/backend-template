@@ -42,3 +42,5 @@ make reload
 | `src/datasources` | For database modules |
 | `src/modules` | For all other modules |
 | `src/util` | For global utilities |
+| `src/gateway` | For websocket namespaces |
+| `src/adaptors` | For adaptors like redis |
