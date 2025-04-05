@@ -33,10 +33,12 @@ make reload
 ```
 
 ## Folder Structure
-- `src/api` - for all modules that has controllers
-- `src/middlewares` - for all global middlewares (controller modules will have middlewares specific to thier controllers)
-- `src/interceptors` - for all global interceptors (controller modules will have interceptors specific to thier controllers)
-- `src/guards` - for all global guards (controller modules will have guards specific to thier controllers)
-- `src/datasources` - for database modules
-- `src/modules` - for all other modules
-- `src/util` - for global utilities
+| Directory | Description |
+|-----------|-------------|
+| `src/api` | For all modules that has controllers |
+| `src/middlewares` | For all global middlewares (controller modules will have middlewares specific to thier controllers) |
+| `src/interceptors` | For all global interceptors (controller modules will have interceptors specific to thier controllers) |
+| `src/guards` | For all global guards (controller modules will have guards specific to thier controllers) |
+| `src/datasources` | For database modules |
+| `src/modules` | For all other modules |
+| `src/util` | For global utilities |
