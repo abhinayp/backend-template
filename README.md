@@ -42,3 +42,7 @@ make reload
 | `src/datasources` | For database modules |
 | `src/modules` | For all other modules |
 | `src/util` | For global utilities |
+| `src/consumers/topics` | For kafka consumer topics |
+| `src/consumers` | Register consumer topics in consumer.controller.ts and consumer.module.ts |
+| `src/gateway` | For websocket namespaces |
+| `src/adaptors` | For adaptors like redis |
