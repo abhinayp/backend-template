@@ -16,4 +16,4 @@ install:
 
 npm:
 	@echo "Running npm command..."
-	docker-compose run --rm --entrypoint npm server $(command)
+	docker compose run --rm --entrypoint npm base $(command)
