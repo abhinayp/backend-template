@@ -1,6 +1,23 @@
 version: "3.8"
 
 services:
+  base:
+    container_name: PROJECTNAME-base
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+      args:
+        - GID=${GID:-1000}
+        - UID=${UID:-1000}
+        - USER=${USER:-PROJECTNAME}
+    entrypoint: ["npm"]
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+    profiles:
+      - base
   server:
     container_name: PROJECTNAME-server
     build:
