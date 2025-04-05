@@ -7,4 +7,4 @@ import { HomeController } from './api/home.controller';
   controllers: [HomeController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
