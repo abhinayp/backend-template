@@ -6,7 +6,7 @@ import { ProductsGateway } from "src/gateway/products.gateway";
 export class CartTopic {
   private readonly logger = new Logger("CartTopic");
 
-  constructor(private readonly productsGateway: ProductsGateway) {}
+  constructor(private readonly productsGateway: ProductsGateway) { }
 
   async updateMetrics(data: CartDTO, context: KafkaContext) {
     this.logger.log(data.user_count);

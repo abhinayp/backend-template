@@ -8,4 +8,4 @@ import { GatewayModule } from 'src/gateway/gateway.module';
   controllers: [ConsumerController],
   providers: [CartTopic],
 })
-export class ConsumerModule {}
+export class ConsumerModule { }

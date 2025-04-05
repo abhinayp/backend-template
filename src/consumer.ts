@@ -15,7 +15,7 @@ async function bootstrap() {
     options: {
       client: {
         brokers: ['kafka:9092'],
-        clientId: 'websockets-client',
+        clientId: 'PROJECTNAME-client',
       }
     },
   });
