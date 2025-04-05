@@ -21,3 +21,30 @@ services:
       - REDIS_HOST=redis://PROJECTNAME-redis:6379
     ports:
       - "5001:5001"
+    depends_on:
+      - redis
+  consumer:
+    container_name: PROJECTNAME-consumer
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+      args:
+        - GID=${GID:-1000}
+        - UID=${UID:-1000}
+        - USER=${USER:-PROJECTNAME}
+    entrypoint: ["npm"]
+    command: ["run", "start:consumer:dev"]
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+      - REDIS_HOST=redis://PROJECTNAME-redis:6379
+    depends_on:
+      - redis
+  redis:
+    container_name: PROJECTNAME-redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
