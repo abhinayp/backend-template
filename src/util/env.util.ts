@@ -1,11 +1,13 @@
 import { z } from 'zod'
 
 const envSchema = z.object({
-  REDIS_HOST: z.string(),
+  SECRETS_PATH: z.string(),
+  VAULT_TOKEN: z.string(),
 })
 
 const env = envSchema.parse({
-  REDIS_HOST: process.env.REDIS_HOST
+  SECRETS_PATH: process.env.SECRETS_PATH,
+  VAULT_TOKEN: process.env.VAULT_TOKEN,
 })
 
 export default env
